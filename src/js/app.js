@@ -2,14 +2,14 @@ define(
   [
     'jquery',
     'underscore',
-    'templates'
+    'templates',
+    'jsx!components/Test'
   ],
-  function(jQuery, _, templates){
+  function(jQuery, _, templates, Test){
     var app = app || {};
 
     app.init = function() {
-      console.log("app initialized");
-      jQuery("body").append(templates["template.html"]({test: "Hello world!"}));
+        Test.render();
     };
 
     return app;

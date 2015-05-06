@@ -11,7 +11,7 @@ require.config({
       exports: 'L'
     }
   }
-});
+  });
 
 require(["app"],
   function(app) {

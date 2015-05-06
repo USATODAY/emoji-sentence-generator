@@ -21,6 +21,10 @@ module.exports = function(grunt) {
     "jquery_ui_touch_punch": "lib/jquery.ui.touch-punch.min",
     "api/analytics": "lib/analytics",
     "d3": '../../bower_components/d3/d3',
+    "text": '../../bower_components/requirejs-text/text',
+    "jsx": '../../bower_components/jsx-requirejs-plugin/js/jsx',
+    "JSXTransformer": '../../bower_components/jsx-requirejs-plugin/js/JSXTransformer',
+    "react": '../../bower_components/react/react-with-addons',
     "mapbox": '../../bower_components/mapbox.js/mapbox.uncompressed'
   };
 
@@ -188,6 +192,9 @@ module.exports = function(grunt) {
             "beautify": true,
             "toplevel": true
           },
+          "jsx": {
+            "fileExtension": '.jsx'
+          },
           "paths": require_paths,
           "shim": require_shim
         }
@@ -209,6 +216,9 @@ module.exports = function(grunt) {
           "uglify2": {
             "beautify": true,
             "toplevel": true
+          },
+          "jsx": {
+            "fileExtension": '.jsx'
           },
           "paths": require_paths,
           "shim": require_shim
