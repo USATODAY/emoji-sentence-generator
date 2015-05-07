@@ -2,31 +2,66 @@ define(
   [
     'jquery',
     'underscore',
-    'templates',
     'react',
+    'dataManager',
     'jsx!components/Test',
-    'jsx!components/Viewer'
+    'jsx!components/Viewer',
+    'jsx!components/SelectorList'
   ],
-  function(jQuery, _, templates, React, Test, Viewer){
+  function(jQuery, _, React, dataManager, Test, Viewer, SelectorList){
     var App = React.createClass({
         getInitialState: function() {
             return {
-                images: ['img/test.jpg'] 
+                images: [],
+                windowWidth: window.innerWidth,
+                downloadImage: false,
+                emoji: []
             }
+        },
+        componentDidMount: function() {
+            window.addEventListener("resize", this.handleResize);
+            var _this = this;
+            dataManager.getData(function(data) {
+                _this.setState(data);
+                console.log(_this.state);
+            });
+        },
+        componentWillUnmount: function() {
+            window.removeEventListener("resize");
         },
         render: function() {
             return (
                 <div>
-                    <Viewer text={"Hello World"} height={600} images={this.state.images} width={1400} />
-                    <div className="button" onClick={this.addImage}>Add One</div>
+                    <SelectorList emojiClickHandler={this.emojiClickHandler} emoji={this.state.emoji}/>
+                    <Viewer text={"Hello World"} height={300} images={this.state.images} width={this.state.windowWidth / 2} download={this.state.downloadImage} />
+                    <div className="button-wrap">
+                        <div className="button" onClick={this.deleteImage}>Backspace</div>
+                        <div className="button" onClick={this.downloadImage} style={{"marginTop": "1em"}}>Save</div>
+                    </div>
                 </div>
             );
         },
-        addImage: function() {
+        addImage: function(emojiObj) {
             console.log(this.state.images);
             var currentImages = this.state.images;
-            currentImages.push('img/test.jpg');
+            currentImages.push(emojiObj.img);
+            this.setState({images: currentImages, downloadImage: false});
+        },
+        deleteImage: function() {
+            var currentImages = this.state.images;
+            currentImages.pop();
             this.setState({images: currentImages});
+        },
+        handleResize: function(e) {
+            this.setState({windowWidth: window.innerWidth, downloadImage: false});
+        },
+        downloadImage: function(e) {
+            this.setState({downloadImage: true});
+        },
+        emojiClickHandler: function(emoji) {
+            console.log("emoji clicked");
+            console.log(emoji);
+            this.addImage(emoji);
         }
     });
 

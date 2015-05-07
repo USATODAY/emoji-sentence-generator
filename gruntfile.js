@@ -25,7 +25,8 @@ module.exports = function(grunt) {
     "jsx": '../../bower_components/jsx-requirejs-plugin/js/jsx',
     "JSXTransformer": '../../bower_components/jsx-requirejs-plugin/js/JSXTransformer',
     "react": '../../bower_components/react/react-with-addons',
-    "mapbox": '../../bower_components/mapbox.js/mapbox.uncompressed'
+    "mapbox": '../../bower_components/mapbox.js/mapbox.uncompressed',
+    'flux': '../../bower_components/flux/dist/Flux'
   };
 
   var require_shim = {

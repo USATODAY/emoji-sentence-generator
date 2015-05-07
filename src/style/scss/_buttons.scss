@@ -1,15 +1,19 @@
 .button {
-  background-color: $blue;
-  color: white;
-  margin: 0 auto;
-  padding: 1em;
-  text-align: center;
-  text-transform: uppercase;
-  transition: background-color .5s;
-  width: 120px;
-  &:hover{
+    background-color: $blue;
+    color: white;
     cursor: pointer;
-    background-color: $dark-blue;
+    margin: 0 auto;
+    margin-top: 1em;
+    padding: 1em;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
     transition: background-color .5s;
-  }
+    width: 120px;
+    z-index: 300;
+    &:hover{
+        cursor: pointer;
+        background-color: $dark-blue;
+        transition: background-color .5s;
+    }
 }
