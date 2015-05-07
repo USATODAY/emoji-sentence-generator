@@ -13,7 +13,7 @@ require.config({
   }
   });
 
-require(["app"],
+require(["jsx!app"],
   function(app) {
     app.init();
   });

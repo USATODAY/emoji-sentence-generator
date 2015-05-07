@@ -29,5 +29,9 @@
     "osenv": "^0.1.0",
     "time-grunt": "^0.3.2"
   },
-  "keywords": []
+  "keywords": [],
+  "dependencies": {
+    "react": "^0.13.2",
+    "react-canvas": "0.0.1"
+  }
 }
