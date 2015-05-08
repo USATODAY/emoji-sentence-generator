@@ -45,9 +45,11 @@ define(
             };
         },
         render: function() {
+            console.log(this.props.width);
             return (
                 <div className="iapp-emoji-viewer">
                     <canvas id="iapp-canvas" width={this.props.width} height={this.props.height}></canvas>
+                    <div className="iapp-round-button iapp-button-blue" onClick={this.downloadImage} style={{"marginTop": "1em"}}><div className="iapp-button-text">Save</div></div>
                 </div>
             );
         },

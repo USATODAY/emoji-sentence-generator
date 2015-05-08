@@ -11,19 +11,25 @@ define(
   function(jQuery, _, React, dataManager, Test, Viewer, SelectorList){
     var App = React.createClass({
         getInitialState: function() {
+            var _this = this;
+            var viewerWidth = this.getViewerWidth();
             return {
                 images: [],
                 windowWidth: window.innerWidth,
+                viewerWidth: viewerWidth,
                 downloadImage: false,
                 emoji: []
             }
         },
         componentDidMount: function() {
+            var viewerWidth = this.getViewerWidth();
+            this.setState({
+                viewerWidth: viewerWidth
+            });
             window.addEventListener("resize", this.handleResize);
             var _this = this;
             dataManager.getData(function(data) {
                 _this.setState(data);
-                console.log(_this.state);
             });
         },
         componentWillUnmount: function() {
@@ -32,11 +38,11 @@ define(
         render: function() {
             return (
                 <div>
-                    <SelectorList emojiClickHandler={this.emojiClickHandler} emoji={this.state.emoji}/>
-                    <Viewer text={"Hello World"} height={300} images={this.state.images} width={this.state.windowWidth / 2} download={this.state.downloadImage} />
+                    <h2 className="iapp-page-header">Emoji Sentence Generator</h2>
+                    <p className="iapp-page-chatter">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Itaque vides, quo modo loquantur, nova verba fingunt, deserunt usitata. Quare ad ea primum, si videtur; Si enim ad populum me vocas, eum. Non minor, inquit, voluptas percipitur ex vilissimis rebus quam ex pretiosissimis. Eorum enim est haec querela, qui sibi cari sunt seseque diligunt. Quid ergo aliud intellegetur nisi uti ne quae pars naturae neglegatur? Duo Reges: constructio interrete. A primo, ut opinor, animantium ortu petitur origo summi boni.</p>
+                    <SelectorList emojiClickHandler={this.emojiClickHandler} emoji={this.state.emoji} onDeleteClick={this.deleteImage}/>
+                    <Viewer text={"Hello World"} height={300} images={this.state.images} width={this.state.viewerWidth} download={this.state.downloadImage} />
                     <div className="button-wrap">
-                        <div className="button" onClick={this.deleteImage}>Backspace</div>
-                        <div className="button" onClick={this.downloadImage} style={{"marginTop": "1em"}}>Save</div>
                     </div>
                 </div>
             );
@@ -53,7 +59,9 @@ define(
             this.setState({images: currentImages});
         },
         handleResize: function(e) {
-            this.setState({windowWidth: window.innerWidth, downloadImage: false});
+            var width = this.getViewerWidth();
+            var viewerWidth = this.getViewerWidth();
+            this.setState({windowWidth: width, viewerWidth: viewerWidth, downloadImage: false});
         },
         downloadImage: function(e) {
             this.setState({downloadImage: true});
@@ -62,6 +70,11 @@ define(
             console.log("emoji clicked");
             console.log(emoji);
             this.addImage(emoji);
+        },
+        getViewerWidth: function() {
+            var wrapWidth = $('.iapp-emoji-viewer').width();
+            console.log("wrap width: ", wrapWidth);
+            return wrapWidth - 32;
         }
     });
 
