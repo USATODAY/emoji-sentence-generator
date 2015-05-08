@@ -1,7 +1,6 @@
-#emoji-sentances
+#emoji-sentences
 
-The best project ever.
-
+Political emoji sentence generator
 
 Copyright 2015 USA TODAY. All rights reserved. No part of these materials may be reproduced, modified, stored in a retrieval system, or retransmitted, in any form or by any means, electronic, mechanical or otherwise, without prior written permission from USA TODAY.
 
@@ -22,5 +21,4 @@ and install Bower with
 Once those dependencies are set up, from this repository run `npm install`, then run `grunt`
 
 
-###Live version:
 
