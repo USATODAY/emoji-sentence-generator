@@ -1,8 +1,16 @@
-.iapp-emoji-selector-list {
+.iapp-emoji-selector-list-wrap {
     float: left;
     padding: 16px;
     width: 50%;
     @media (max-width: 800px) {
         width: 100%;
     }
+}
+
+.iapp-emoji-selector-list{
+    // border: solid 1px $medium-grey;
+    border-radius: 10px;
+    margin: 0 0 1em 0;
+    max-width: 400px;
+    padding: 1em;
 }

@@ -1,14 +1,14 @@
 define(
     [
-        "react"
+        "react",
+        "config"
     ],
-    function(React) {
+    function(React, config) {
         return React.createClass({
             render: function() {
-                console.log(this.props);
                 return (
                     <div className="iapp-emoji-selector" onClick={this.emojiClickHandler}>
-                        <img src={this.props.data.img} alt="" />
+                        <img src={config.base_url_path + this.props.data.img} alt="" />
                     </div>
                 );
             },

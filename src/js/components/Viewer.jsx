@@ -1,8 +1,9 @@
 define(
     [
-        'react'
+        'react',
+        'config'
     ], 
-    function(React) {
+    function(React, config) {
     return React.createClass({
         getInitialState: function() {
             var _this = this;
@@ -21,14 +22,10 @@ define(
             this.canvas = document.getElementById("iapp-canvas");
             this.ctx = this.canvas.getContext("2d");
             this.fillBox();
-            for (i=0; i<this.props.images.length; i++) {
-                this.drawImage('img/test.jpg', i);
-            };
         },
         componentDidUpdate: function() {
 
             var newCols = this.calcNumColumns(this.state.itemMargin, this.state.canvasPadding);
-            console.log(newCols);
             if (newCols != this.state.numCols) {
                 this.setState({
                     numCols: newCols
@@ -39,17 +36,18 @@ define(
                 this.handleDownload();
             }
 
+            var maxNum = this.getMaxNumItems();
+
             this.fillBox();
             for (i=0; i<this.props.images.length; i++) {
                 this.drawImage(this.props.images[i], i);
             };
         },
         render: function() {
-            console.log(this.props.width);
             return (
                 <div className="iapp-emoji-viewer">
                     <canvas id="iapp-canvas" width={this.props.width} height={this.props.height}></canvas>
-                    <div className="iapp-round-button iapp-button-blue" onClick={this.downloadImage} style={{"marginTop": "1em"}}><div className="iapp-button-text">Save</div></div>
+                    <div className="iapp-round-button iapp-button-blue" onClick={this.props.onSaveClick} style={{"marginTop": "1em"}}><div className="iapp-button-text">Save</div></div>
                 </div>
             );
         },
@@ -65,25 +63,24 @@ define(
         drawImage: function(imagePath, num) {
             var _this = this;
             var img = new Image();
+            var imgUrl = config.base_url_path + imagePath;
             img.addEventListener("load", function() {
                 var width = img.width;
                 var height = img.height;
-                console.log(width, height);
                 var colNum = num % _this.state.numCols;
                 var rowNum = Math.floor(num/_this.state.numCols);
                 var leftPos = _this.state.canvasPadding + colNum * (width + _this.state.itemMargin);
                 var topPos = _this.state.canvasPadding + rowNum * (height + _this.state.itemMargin);
                 _this.ctx.drawImage(img, leftPos, topPos);
             }, false);
-            img.src = imagePath;
+            img.src = imgUrl;
 
         },
         calcNumColumns: function(itemMargin, canvasPadding) {
-            return Math.floor((this.props.width - (2 * canvasPadding))/ (35 + itemMargin * 2));
+            return Math.floor((this.props.width - (2 * canvasPadding))/ (config.item_size + itemMargin * 2));
         },
         handleDownload: function() {
             /// create an "off-screen" anchor tag
-            console.log("download");
             var link = document.createElement('a'),
                 e;
             link.download =  'emoji-sentence.png';
@@ -108,6 +105,11 @@ define(
             } else {
                 alert("didn't work");
             }
+        },
+        getMaxNumItems: function() {
+            numRows = Math.floor((this.props.height - 2 * this.state.canvasPadding) / (config.item_size + 2 * this.state.itemMargin));
+            var numItems =  numRows * this.calcNumColumns(this.state.itemMargin, this.state.canvasPadding);
+            return numItems;
         }
     });
 });

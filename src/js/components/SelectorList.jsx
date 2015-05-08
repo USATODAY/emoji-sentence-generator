@@ -17,8 +17,10 @@ define(
 
 
                 return (
-                    <div className="iapp-emoji-selector-list">
-                        {selectors}
+                    <div className="iapp-emoji-selector-list-wrap">
+                        <div className="iapp-emoji-selector-list">
+                            {selectors}
+                        </div>
                         <div className="iapp-round-button iapp-button-blue" onClick={this.props.onDeleteClick}><div className="iapp-button-text">Delete</div></div>
                     </div>
                 );

@@ -1,6 +1,13 @@
 .iapp-emoji-selector {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
     cursor: pointer;
     display: inline-block;
     margin: 5px;
+    padding: 5px;
+    transition: all 250ms ease;
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
 }
 
