@@ -308,17 +308,17 @@ module.exports = function(grunt) {
       },
       upload1: {
         files: {
-          '/17200/experiments/usatoday/2015/05/emoji-sentances/': 'js/main.js'
+          '/17200/experiments/usatoday/2015/05/emoji-sentences/': 'js/main.js'
         }
       },
       upload2: {
         files: {
-          '/17200/experiments/usatoday/2015/05/emoji-sentances/': 'style/project.css'
+          '/17200/experiments/usatoday/2015/05/emoji-sentences/': 'style/project.css'
         }
       },
       upload3: {
         files: {
-          '/17200/experiments/usatoday/2015/05/emoji-sentances/': 'data/*.json'
+          '/17200/experiments/usatoday/2015/05/emoji-sentences/': 'data/*.json'
         }
       }
     },
