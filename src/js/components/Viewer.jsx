@@ -63,7 +63,7 @@ define(
         drawImage: function(imagePath, num) {
             var _this = this;
             var img = new Image();
-            var imgUrl = config.base_url_path + imagePath;
+            var imgUrl = config.base_url_path + config.emoji_image_folder + '/' + imagePath;
             img.addEventListener("load", function() {
                 var width = img.width;
                 var height = img.height;

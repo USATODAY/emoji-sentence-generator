@@ -11,6 +11,7 @@
     "mapbox.js": ">=2.1.0",
     "jsx-requirejs-plugin": "~0.6.0",
     "react": "~0.13.2",
-    "flux": "~2.0.2"
+    "flux": "~2.0.2",
+    "js-emoji": "~1.0.0"
   }
 }
