@@ -2,9 +2,10 @@ define(
     [
         "react",
         'underscore',
+        'config',
         "jsx!components/KeyboardCategory"
     ],
-    function(React, _, KeyboardCategory) {
+    function(React, _, config, KeyboardCategory) {
         return React.createClass({
             propTypes: function() {
                 return {
@@ -76,7 +77,7 @@ define(
 
 
                     _.each(sortedCategory, function(emojiObj, index) {
-                        var sheetNum = Math.floor(index / 21);
+                        var sheetNum = Math.floor(index / config.emoji_per_page);
                         if (newCategory.sheets[sheetNum]) {
                             newCategory.sheets[sheetNum].push(emojiObj);
                         } else {

@@ -49,9 +49,9 @@ define(
         render: function() {
             return (
                 <div>
-                    <h2 className="iapp-page-header">Emoji Sentence Generator <span className="emoji-0023-20e3 emoji"></span></h2>
+                    <h2 className="iapp-page-header">Emoji Sentence Generator</h2>
                     <p className="iapp-page-chatter">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Itaque vides, quo modo loquantur, nova verba fingunt, deserunt usitata. Quare ad ea primum, si videtur; Si enim ad populum me vocas, eum. Non minor, inquit, voluptas percipitur ex vilissimis rebus quam ex pretiosissimis. Eorum enim est haec querela, qui sibi cari sunt seseque diligunt. Quid ergo aliud intellegetur nisi uti ne quae pars naturae neglegatur? Duo Reges: constructio interrete. A primo, ut opinor, animantium ortu petitur origo summi boni.</p>
-                    <Viewer text={"Hello World"} height={300} images={this.state.images} width={this.state.viewerWidth} download={this.state.downloadImage} onSaveClick={this.downloadImage} />
+                    <Viewer text={"Hello World"} height={200} images={this.state.images} width={this.state.viewerWidth} download={this.state.downloadImage} onSaveClick={this.downloadImage} />
                     <Keyboard emojiClickHandler={this.emojiClickHandler} emoji={this.state.emoji} onDeleteClick={this.deleteImage}/>
                 </div>
             );
