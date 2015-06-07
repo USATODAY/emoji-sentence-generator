@@ -88,6 +88,7 @@ define(
             /// attribute is set the content pointed to by link will be
             /// pushed as "download" in HTML5 capable browsers
             link.href = this.canvas.toDataURL();
+            console.log(link.href);
             link.target = "_blank";
 
             /// create a "fake" click-event to trigger the download
