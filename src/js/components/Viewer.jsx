@@ -63,7 +63,7 @@ define(
         drawImage: function(imagePath, num) {
             var _this = this;
             var img = new Image();
-            var imgUrl = config.base_url_path + imagePath;
+            var imgUrl = config.base_url_path + config.emoji_image_folder + '/' + imagePath;
             img.addEventListener("load", function() {
                 var width = img.width;
                 var height = img.height;
@@ -88,6 +88,7 @@ define(
             /// attribute is set the content pointed to by link will be
             /// pushed as "download" in HTML5 capable browsers
             link.href = this.canvas.toDataURL();
+            console.log(link.href);
             link.target = "_blank";
 
             /// create a "fake" click-event to trigger the download

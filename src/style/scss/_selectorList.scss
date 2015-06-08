@@ -1,7 +1,10 @@
 .iapp-emoji-selector-list-wrap {
-    float: left;
+    background: $light-grey;
+    bottom: 0;
+    height: 250px;
     padding: 16px;
-    width: 50%;
+    position: fixed;
+    width: 100%;
     @media (max-width: 800px) {
         width: 100%;
     }
@@ -10,7 +13,67 @@
 .iapp-emoji-selector-list{
     // border: solid 1px $medium-grey;
     border-radius: 10px;
-    margin: 0 0 1em 0;
-    max-width: 400px;
-    padding: 1em;
+    height: 90%;
+    margin: 0 auto;
+    max-width: 350px;
+    overflow: hidden;
+    // padding: 1em;
+    position: relative;
+
+}
+
+.iapp-keyboard-category-wrapper {
+    display: none;
+    bottom: 0;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    &.iapp-active {
+        display: block;
+    }
+}
+
+.iapp-keyboard-category-nav-button {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    color: $medium-grey;
+    cursor: pointer;
+    font-size: 0.75em;
+    margin: 0 3px 5px 0;
+    padding: 5px;
+    text-transform: uppercase;
+}
+
+.iapp-keyboard-page-wrap {
+    position: absolute;
+    transform: translate(100%, 0);
+    transition: transform 200ms ease-out;
+    width: 100%;
+    &.iapp-active {
+        transform: translate(0, 0);
+    }
+}
+
+.iapp-keyboard-nav-wrap {
+    text-align: center;
+}
+
+.iapp-keyboard-page-nav-button {
+    background: transparentize($medium-grey, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-block;
+    height: 12px;
+    margin: 10px 5px;
+    width: 12px;
+}
+
+.iapp-keyboard-category-nav-wrap {
+    margin-bottom: 5px;
+    text-align: center;
+    width: 100%;
+}
+
+.iapp-keyboard-category-nav-button {
+    display: inline-block;
 }

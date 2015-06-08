@@ -9,7 +9,14 @@
 @import "selectorList";
 @import "viewer";
 @import "fullWidth";
+@import "emoji-24px";
 
 .button-wrap {
     clear: both;
+}
+
+.emoji {
+    display: inline-block;
+    height: 20px;
+    width: 20px;
 }
