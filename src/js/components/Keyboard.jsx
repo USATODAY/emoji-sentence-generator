@@ -53,7 +53,7 @@ define(
                         <div className="iapp-keyboard-category-nav-wrap">
                             {categoryNavNodes}
                         </div>
-                        <div className="iapp-round-button iapp-button-blue" onClick={this.props.onDeleteClick}><div className="iapp-button-text">Delete</div></div>
+                        <div className="iapp-keyboard-delete-key" onClick={this.props.onDeleteClick}><div className="">Delete</div></div>
                     </div>
                 );
             },

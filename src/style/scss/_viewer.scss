@@ -2,10 +2,16 @@
     background-color: white;
     border-radius: 10px;
     @include BoxShadowHelper(1);
-    margin: 0 0 1em 0;
+    margin: 0 auto 1em auto;
     padding: 16px;
     width: 50%;
     @media (max-width: 800px) {
         width: 100%;
     }
+}
+
+.iapp-politician-quote {
+    color: $medium-grey;
+    font-family: "Futura Today Light", Arial, sans-serif;
+    font-size: 1.5em;
 }
