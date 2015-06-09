@@ -21,6 +21,10 @@
     text-align: right;
     top: 10px;
     transform: translate(150px, 0);
+    width: 40px;
+    img {
+        max-width: 100%;
+    }
 }
 
 .iapp-emoji-selector-list{

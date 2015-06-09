@@ -4,12 +4,13 @@ define(
     'underscore',
     'react',
     'dataManager',
+    'config',
     'jsx!components/Test',
     'jsx!components/Viewer',
     'jsx!components/Keyboard',
     'jsx!components/Index'
   ],
-  function(jQuery, _, React, dataManager, Test, Viewer, Keyboard, Index) {
+  function(jQuery, _, React, dataManager, config, Test, Viewer, Keyboard, Index) {
     var App = React.createClass({
         getInitialState: function() {
             var _this = this;
@@ -47,17 +48,24 @@ define(
         render: function() {
             var content;
             var viewerWidth = this.getViewerWidth();
-            console.log(this.state.politicians);
             if (this.state.focus !== null) {
-                console.log(this.state.focus);
-                content = ( <div>
-                    <Viewer politician={this.state.focus} text={"Hello World"} height={200} images={this.state.images} width={viewerWidth} download={this.state.downloadImage} onSaveClick={this.downloadImage} />
-                    <Keyboard emojiClickHandler={this.emojiClickHandler} emoji={this.state.emoji} onDeleteClick={this.deleteImage}/>
-                </div>);
+                content = ( 
+                    <div className="iapp-main-content-wrap">
+                        <div className="iapp-controls-wrap">
+                            <div className="iapp-politician-close-button" onClick={this.clearFocus}>Close</div>
+                            <div className="iapp-politician-next-button" onClick={this.nextFocus}>Next</div>
+                            <div className="iapp-politician-previous-button" onClick={this.previousFocus}>Previous</div>
+                        </div>
+                        <Viewer politician={this.state.focus} text={"Hello World"} height={200} images={this.state.images} width={viewerWidth} download={this.state.downloadImage} onSaveClick={this.downloadImage} />
+                        <Keyboard emojiClickHandler={this.emojiClickHandler} emoji={this.state.emoji} onDeleteClick={this.deleteImage}/>
+                    </div>
+                );
             
             } else {
                 content = (
-                 <div>
+                 <div className="iapp-main-index-wrap">
+                    <h2 className="iapp-page-header">{this.state.head}</h2>
+                    <p className="iapp-page-chatter">{this.state.chatter}</p>
                     <Index politicians={this.state.politicians} politicianClick={this.setFocus}/>
                 </div>
                 );
@@ -94,6 +102,27 @@ define(
             this.setState({
                 focus: politicianObj
             });
+        },
+        clearFocus: function() {
+            this.setState({
+                focus: null,
+                images: []
+            });
+        },
+        nextFocus: function() {
+            var currentIndex = this.state.politicians.indexOf(this.state.focus);
+            this.setState({
+                focus: this.state.politicians[currentIndex + 1],
+                images: []
+            });
+        },
+        previousFocus: function() {
+            var currentIndex = this.state.politicians.indexOf(this.state.focus);
+            this.setState({
+                focus: this.state.politicians[currentIndex - 1],
+                images: []
+            });
+
         }
     });
 

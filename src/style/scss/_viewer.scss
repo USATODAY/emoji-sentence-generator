@@ -2,7 +2,7 @@
     background-color: white;
     border-radius: 10px;
     @include BoxShadowHelper(1);
-    margin: 0 auto 1em auto;
+    margin: 0 auto 400px auto;
     padding: 16px;
     width: 50%;
     @media (max-width: 800px) {
@@ -14,4 +14,14 @@
     color: $medium-grey;
     font-family: "Futura Today Light", Arial, sans-serif;
     font-size: 1.5em;
+}
+
+.iapp-politician-close-button {
+    background-color: rgba(50, 50, 50, 0.5);
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+    right: 10px;
+    top: 100px;
 }

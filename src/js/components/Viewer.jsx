@@ -1,43 +1,27 @@
 define(
     [
         'react',
-        'config'
+        'config',
+        'api/analytics'
     ], 
-    function(React, config) {
+    function(React, config, Analytics) {
     return React.createClass({
         getInitialState: function() {
             var _this = this;
 
-            var itemMargin = 5;
-            var canvasPadding = 20;
-
-            var numCols = this.calcNumColumns(itemMargin, canvasPadding);
             return {
-                canvasPadding: canvasPadding,
-                itemMargin: itemMargin,
-                numCols: numCols
+            
             }
         },
         componentDidMount: function() {
+            this.itemMargin = 5;
+            this.canvasPadding = 20;
             this.canvas = document.getElementById("iapp-canvas");
             this.ctx = this.canvas.getContext("2d");
             this.fillBox();
             this.setupViewer();
         },
         componentDidUpdate: function() {
-
-            var newCols = this.calcNumColumns(this.state.itemMargin, this.state.canvasPadding);
-            if (newCols != this.state.numCols) {
-                this.setState({
-                    numCols: newCols
-                });
-            }
-
-            if (this.props.download) {
-                this.handleDownload();
-            }
-
-            var maxNum = this.getMaxNumItems();
 
             this.fillBox();
             this.setupViewer();
@@ -51,7 +35,7 @@ define(
                 <div className="iapp-emoji-viewer">
                     <h3 className="iapp-politician-quote">“{this.props.politician.quote}”</h3>
                     <canvas id="iapp-canvas" width={this.props.width} height={this.props.height}></canvas>
-                    <div className="iapp-round-button iapp-button-blue" onClick={this.props.onSaveClick} style={{"marginTop": "1em"}}><div className="iapp-button-text">Save</div></div>
+                    <div className="iapp-share-button" onClick={this.share}>Share</div>
                 </div>
             );
         },
@@ -65,7 +49,7 @@ define(
             this.ctx.fillText(string, 10, 50);
         },
         setupViewer: function() {
-            this.drawImage('speech.png', 100, 10, 1);
+            this.drawImage('speech-long.png', 100, 0, 1);
             this.drawImage("custom/100/" + this.props.politician.img, 5, 10, 1);
         },
         drawImage: function(imagePath, left, top, scale) {
@@ -87,10 +71,8 @@ define(
             var width = config.item_size * scale;
             var height = config.item_size * scale;
             var imgUrl =  config.emoji_image_folder + '/' + imagePath;
-            var colNum = num % _this.state.numCols;
-            var rowNum = Math.floor(num/_this.state.numCols);
-            var leftPos = 140 + colNum * (width + _this.state.itemMargin);
-            var topPos = 40 + rowNum * (height + _this.state.itemMargin);
+            var leftPos = 140 + num * (width + _this.itemMargin);
+            var topPos = 40;
             this.drawImage(imgUrl, leftPos, topPos, scale);
         },
         calcNumColumns: function(itemMargin, canvasPadding) {
@@ -124,11 +106,11 @@ define(
                 alert("didn't work");
             }
         },
-        getMaxNumItems: function() {
-            numRows = Math.floor((this.props.height - 2 * this.state.canvasPadding) / (config.item_size + 2 * this.state.itemMargin));
-            var numItems =  numRows * this.calcNumColumns(this.state.itemMargin, this.state.canvasPadding);
-            console.log("numitems: ", numItems);
-            return numItems;
+        share: function() {
+            Analytics.trackEvent("Share clicked");
+            var imageURI = this.canvas.toDataURL();
+
+            // @Todo POST image uri to image service, receive back URL to use in share
         }
     });
 });
