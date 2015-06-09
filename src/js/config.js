@@ -10,7 +10,7 @@ define(
         }
         return {
             "base_url_path": baseURL,
-            "item_size": 35,
+            "item_size": 64,
             "emoji_image_folder": "img-apple-64",
             "emoji_per_page": 24
         };
