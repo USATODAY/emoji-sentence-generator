@@ -14,13 +14,15 @@ define(
     var App = React.createClass({
         getInitialState: function() {
             var _this = this;
+            var showKeyboard = !config.isMobile;
             return {
                 images: [],
                 windowWidth: window.innerWidth,
                 downloadImage: false,
                 emoji: [],
                 focus: null,
-                politicians: []
+                politicians: [],
+                showKeyboard: showKeyboard
             }
         },
         componentDidMount: function() {
@@ -48,16 +50,17 @@ define(
         render: function() {
             var content;
             var viewerWidth = this.getViewerWidth();
+            viewerWidth = 300;
             if (this.state.focus !== null) {
                 content = ( 
                     <div className="iapp-main-content-wrap">
                         <div className="iapp-controls-wrap">
-                            <div className="iapp-politician-close-button" onClick={this.clearFocus}>Close</div>
-                            <div className="iapp-politician-next-button" onClick={this.nextFocus}>Next</div>
-                            <div className="iapp-politician-previous-button" onClick={this.previousFocus}>Previous</div>
+                            <div className="iapp-politician-close-button" onClick={this.clearFocus}><img src={config.base_url_path + "close.png"} alt="close" /></div>
+                            <div className="iapp-politician-next-button" onClick={this.nextFocus}><img src={config.base_url_path + "right-arrow.png"} alt="next" /></div>
+                            <div className="iapp-politician-previous-button" onClick={this.previousFocus}><img src={config.base_url_path + "left-arrow.png"} alt="previous" /></div>
                         </div>
-                        <Viewer politician={this.state.focus} text={"Hello World"} height={200} images={this.state.images} width={viewerWidth} download={this.state.downloadImage} onSaveClick={this.downloadImage} />
-                        <Keyboard emojiClickHandler={this.emojiClickHandler} emoji={this.state.emoji} onDeleteClick={this.deleteImage}/>
+                        <Viewer politician={this.state.focus} text={"Hello World"} height={250} images={this.state.images} width={viewerWidth} download={this.state.downloadImage} onSaveClick={this.downloadImage} />
+                        <Keyboard emojiClickHandler={this.emojiClickHandler} show={this.state.showKeyboard} emoji={this.state.emoji} onDeleteClick={this.deleteImage} toggleKeyboard={this.toggleKeyboard}/>
                     </div>
                 );
             
@@ -74,8 +77,10 @@ define(
         },
         addImage: function(emojiObj) {
             var currentImages = this.state.images;
-            currentImages.push(emojiObj.image);
-            this.setState({images: currentImages, downloadImage: false});
+            if (currentImages.length < config.getEmojiLimit()) {
+                currentImages.push(emojiObj.image);
+                this.setState({images: currentImages, downloadImage: false});
+            }
         },
         deleteImage: function() {
             var currentImages = this.state.images;
@@ -111,6 +116,11 @@ define(
         },
         nextFocus: function() {
             var currentIndex = this.state.politicians.indexOf(this.state.focus);
+            
+            if (currentIndex == this.state.politicians.length - 1) {
+                currentIndex = -1;
+            };
+
             this.setState({
                 focus: this.state.politicians[currentIndex + 1],
                 images: []
@@ -118,11 +128,21 @@ define(
         },
         previousFocus: function() {
             var currentIndex = this.state.politicians.indexOf(this.state.focus);
+            
+            if (currentIndex === 0) {
+                currentIndex = this.state.politicians.length;
+            };
+
             this.setState({
                 focus: this.state.politicians[currentIndex - 1],
                 images: []
             });
 
+        },
+        toggleKeyboard: function() {
+            this.setState({
+                showKeyboard: !this.state.showKeyboard
+            });
         }
     });
 

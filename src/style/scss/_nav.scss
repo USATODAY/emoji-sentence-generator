@@ -1,0 +1,40 @@
+.iapp-politician-next-button, .iapp-politician-previous-button {
+    background-color: $medium-grey;
+    @include BoxShadowHelper(1);
+    cursor: pointer;
+    position: absolute;
+    padding: 1em;
+    top: 20%;
+    img {
+        max-width: 100%;
+    }
+    @media(max-width: 500px) {
+        padding: 5px;
+        width: 30px;
+    }
+}
+
+.iapp-politician-next-button {
+    right: 0;
+}
+
+.iapp-politician-previous-button {
+    left: 0;
+}
+
+.iapp-politician-close-button {
+    background-color: $medium-grey;
+    @include BoxShadowHelper(1);
+    cursor: pointer;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 40px;
+    padding: 10px;
+    position: absolute;
+    right: 10px;
+    top: 50px;
+    width: 40px;
+    img {
+        max-width: 100%;
+    }
+}

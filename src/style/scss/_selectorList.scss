@@ -4,23 +4,26 @@
     height: 250px;
     padding: 16px;
     position: fixed;
+    transition: transform 250ms ease;
+    transform: (0, 0);
     width: 100%;
     @media (max-width: 800px) {
         width: 100%;
+    }
+    &.iapp-hide {
+        transform: translate(0, 220px);
     }
 }
 
 .iapp-keyboard-delete-key {
     background: rgba(225, 225, 225, 0.85);
-    border-radius: 5px;
     color: white;
     cursor: pointer;
-    left: 50%;
-    padding: 5px;
+    padding: 0 5px;
     position: absolute;
+    right: 0;
     text-align: right;
-    top: 10px;
-    transform: translate(150px, 0);
+    top: 0;
     width: 40px;
     img {
         max-width: 100%;
@@ -30,12 +33,13 @@
 .iapp-emoji-selector-list{
     // border: solid 1px $medium-grey;
     border-radius: 10px;
-    height: 90%;
+    height: calc(90% - 25px);
     margin: 0 auto;
     max-width: 350px;
     overflow: hidden;
     // padding: 1em;
     position: relative;
+    top: 25px
 
 }
 
@@ -59,6 +63,9 @@
     margin: 0 3px 5px 0;
     padding: 5px;
     text-transform: uppercase;
+    @media(max-width: 400px) {
+        font-size: 0.5em;
+    }
 }
 
 .iapp-keyboard-page-wrap {
@@ -86,11 +93,32 @@
 }
 
 .iapp-keyboard-category-nav-wrap {
-    margin-bottom: 5px;
+    bottom: 0;
+    position: absolute;
     text-align: center;
     width: 100%;
 }
 
 .iapp-keyboard-category-nav-button {
     display: inline-block;
+}
+
+.iapp-show-keyboard-button {
+    background-color: $light-grey;
+    cursor: pointer;
+    left: 50%;
+    padding: 10px;;
+    width: 9em;
+    // position: fixed;
+    // transform: translate(-200px, -250px);
+}
+
+.iapp-keyboard-top-wrap {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
 }

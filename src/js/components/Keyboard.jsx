@@ -24,7 +24,6 @@ define(
                 if (categorizedEmojis.People) {
                     _.each(categorizedEmojis, function(category, key) {
                         if (key !== "null") {
-                            console.log(key == _this.state.currentCategory);
                             var isActive = false;
                             if (key == _this.state.currentCategory) {
                                 isActive = true;
@@ -45,15 +44,28 @@ define(
                     };
                 });
 
+                var className = "iapp-emoji-selector-list-wrap";
+                if (!this.props.show) {
+                    className += " iapp-hide";
+                };
+
+                var showButtonClass = this.props.show ? "iapp-show-keyboard-button iapp-hide" : "iapp-show-keyboard-button";
+                var toggleText = this.props.show ? "Hide Keyboard" : "Show Keyboard";
+
                 return (
-                    <div className="iapp-emoji-selector-list-wrap">
-                        <div className="iapp-emoji-selector-list">
-                            {categories}
+                    <div className="iapp-keyboard-wrap">
+                        <div className={className}>
+                            <div className="iapp-emoji-selector-list">
+                                {categories}
+                            </div>
+                            <div className="iapp-keyboard-top-wrap">
+                                <div className={showButtonClass} onClick={this.props.toggleKeyboard}>{toggleText}</div>
+                                <div className="iapp-keyboard-delete-key" onClick={this.props.onDeleteClick}><div className=""><img src={config.base_url_path + "delete.png"} alt="delete" /></div></div>
+                            </div>
+                            <div className="iapp-keyboard-category-nav-wrap">
+                                {categoryNavNodes}
+                            </div>
                         </div>
-                        <div className="iapp-keyboard-category-nav-wrap">
-                            {categoryNavNodes}
-                        </div>
-                        <div className="iapp-keyboard-delete-key" onClick={this.props.onDeleteClick}><div className=""><img src={config.base_url_path + "delete.png"} alt="delete" /></div></div>
                     </div>
                 );
             },

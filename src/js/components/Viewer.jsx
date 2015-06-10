@@ -15,7 +15,7 @@ define(
         },
         componentDidMount: function() {
             this.itemMargin = 5;
-            this.canvasPadding = 20;
+            this.canvasPadding = 10;
             this.canvas = document.getElementById("iapp-canvas");
             this.ctx = this.canvas.getContext("2d");
             this.fillBox();
@@ -34,7 +34,8 @@ define(
             return (
                 <div className="iapp-emoji-viewer">
                     <h3 className="iapp-politician-quote">“{this.props.politician.quote}”</h3>
-                    <canvas id="iapp-canvas" width={this.props.width} height={this.props.height}></canvas>
+                    <h3 className="iapp-politician-credit">—{this.props.politician.name}, {this.props.politician.quote_date}</h3>
+                    <canvas id="iapp-canvas" className="iapp-canvas-quote" width={this.props.width} height={this.props.height}></canvas>
                     <div className="iapp-share-button" onClick={this.share}>Share</div>
                 </div>
             );
@@ -49,8 +50,8 @@ define(
             this.ctx.fillText(string, 10, 50);
         },
         setupViewer: function() {
-            this.drawImage('speech-long.png', 100, 0, 1);
-            this.drawImage("custom/100/" + this.props.politician.img, 5, 10, 1);
+                this.drawImage('speech.png', 0, 0, 1);
+                this.drawImage("custom/100/" + this.props.politician.img, 0, 110, 1);
         },
         drawImage: function(imagePath, left, top, scale) {
             var _this = this;
@@ -65,14 +66,15 @@ define(
             img.src = imgUrl;
         },
         drawEmoji: function(imagePath, num) {
-            console.log("draw emoji");
             var scale = 0.5;
             var _this = this;
+            var rowNum = Math.floor(num/6);
+            var colNum = num % 6;
             var width = config.item_size * scale;
             var height = config.item_size * scale;
             var imgUrl =  config.emoji_image_folder + '/' + imagePath;
-            var leftPos = 140 + num * (width + _this.itemMargin);
-            var topPos = 40;
+            var leftPos = this.canvasPadding + colNum * (width + this.itemMargin);
+            var topPos = this.canvasPadding + rowNum * (height + this.itemMargin);
             this.drawImage(imgUrl, leftPos, topPos, scale);
         },
         calcNumColumns: function(itemMargin, canvasPadding) {
