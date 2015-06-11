@@ -60,7 +60,7 @@ define(
                             </div>
                             <div className="iapp-keyboard-top-wrap">
                                 <div className={showButtonClass} onClick={this.props.toggleKeyboard}>{toggleText}</div>
-                                <div className="iapp-keyboard-delete-key" onClick={this.props.onDeleteClick}><div className=""><img src={config.base_url_path + "delete.png"} alt="delete" /></div></div>
+                                <div className="iapp-keyboard-delete-key" onClick={this.props.onDeleteClick}>Delete</div>
                             </div>
                             <div className="iapp-keyboard-category-nav-wrap">
                                 {categoryNavNodes}

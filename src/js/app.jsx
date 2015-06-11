@@ -22,7 +22,7 @@ define(
                 emoji: [],
                 focus: null,
                 politicians: [],
-                showKeyboard: showKeyboard
+                showKeyboard: false
             }
         },
         componentDidMount: function() {
@@ -59,7 +59,7 @@ define(
                             <div className="iapp-politician-next-button" onClick={this.nextFocus}><img src={config.base_url_path + "right-arrow.png"} alt="next" /></div>
                             <div className="iapp-politician-previous-button" onClick={this.previousFocus}><img src={config.base_url_path + "left-arrow.png"} alt="previous" /></div>
                         </div>
-                        <Viewer politician={this.state.focus} text={"Hello World"} height={250} images={this.state.images} width={viewerWidth} download={this.state.downloadImage} onSaveClick={this.downloadImage} />
+                        <Viewer politician={this.state.focus} text={"Hello World"} height={250} images={this.state.images} width={viewerWidth} toggleKeyboard={this.toggleKeyboard} download={this.state.downloadImage} onSaveClick={this.downloadImage} />
                         <Keyboard emojiClickHandler={this.emojiClickHandler} show={this.state.showKeyboard} emoji={this.state.emoji} onDeleteClick={this.deleteImage} toggleKeyboard={this.toggleKeyboard}/>
                     </div>
                 );

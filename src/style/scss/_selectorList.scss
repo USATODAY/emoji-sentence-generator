@@ -13,18 +13,22 @@
     &.iapp-hide {
         transform: translate(0, 220px);
     }
+    @media(max-width: 400px) {
+        height: 270px;
+    }
 }
 
 .iapp-keyboard-delete-key {
-    background: rgba(225, 225, 225, 0.85);
-    color: white;
+    background-color: $light-grey;
+    color: $medium-grey;
     cursor: pointer;
-    padding: 0 5px;
+    padding: 10px;;
+    width: 9em;
+
     position: absolute;
     right: 0;
-    text-align: right;
+    text-align: center;
     top: 0;
-    width: 40px;
     img {
         max-width: 100%;
     }
@@ -40,6 +44,7 @@
     // padding: 1em;
     position: relative;
     top: 25px
+    
 
 }
 
@@ -63,9 +68,6 @@
     margin: 0 3px 5px 0;
     padding: 5px;
     text-transform: uppercase;
-    @media(max-width: 400px) {
-        font-size: 0.5em;
-    }
 }
 
 .iapp-keyboard-page-wrap {
@@ -105,9 +107,11 @@
 
 .iapp-show-keyboard-button {
     background-color: $light-grey;
+    color: $medium-grey;
     cursor: pointer;
     left: 50%;
     padding: 10px;;
+    text-align: center;
     width: 9em;
     // position: fixed;
     // transform: translate(-200px, -250px);

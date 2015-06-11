@@ -2,9 +2,10 @@
     background-color: $medium-grey;
     @include BoxShadowHelper(1);
     cursor: pointer;
-    position: absolute;
+    position: fixed;
     padding: 1em;
-    top: 20%;
+    top: 40%;
+    transform: translate(0, -50%);
     img {
         max-width: 100%;
     }

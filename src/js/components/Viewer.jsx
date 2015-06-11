@@ -35,7 +35,7 @@ define(
                 <div className="iapp-emoji-viewer">
                     <h3 className="iapp-politician-quote">“{this.props.politician.quote}”</h3>
                     <h3 className="iapp-politician-credit">—{this.props.politician.name}, {this.props.politician.quote_date}</h3>
-                    <canvas id="iapp-canvas" className="iapp-canvas-quote" width={this.props.width} height={this.props.height}></canvas>
+                    <canvas id="iapp-canvas" onClick={this.props.toggleKeyboard} className="iapp-canvas-quote" width={this.props.width} height={this.props.height}></canvas>
                     <div className="iapp-share-button" onClick={this.share}>Share</div>
                 </div>
             );
