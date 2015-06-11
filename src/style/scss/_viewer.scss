@@ -2,10 +2,12 @@
     background-color: white;
     border-radius: 10px;
     @include BoxShadowHelper(1);
-    margin: 0 auto 400px auto;
-    padding: 16px;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 16px 16px 300px 16px;
     width: 50%;
     @media (max-width: 800px) {
+        padding: 35px 35px 300px 35px;
         width: 100%;
     }
 }
@@ -14,14 +16,13 @@
     color: $medium-grey;
     font-family: "Futura Today Light", Arial, sans-serif;
     font-size: 1.5em;
+    @media(max-width: 400px) {
+        font-size: 1.2em;
+    }
 }
 
-.iapp-politician-close-button {
-    background-color: rgba(50, 50, 50, 0.5);
-    border-radius: 5px;
+.iapp-canvas-quote {
     cursor: pointer;
-    padding: 10px;
-    position: absolute;
-    right: 10px;
-    top: 100px;
+    display: block;
+    margin: 0 auto;
 }
