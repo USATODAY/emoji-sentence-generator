@@ -46,7 +46,7 @@ define(
                 var emailLink = "mailto:?body=" + encodeURIComponent(shareString) +  "%0d%0d" + twitterShareURL + "&subject=";
                 
                 return {
-                    'fb_id': config.facebook_app_id,
+                    'fb_id': config.fb_app_id,
                     fbShare:  encodeURI(shareURL.replace('#', '%23')),
                     stillimage: imageURL,
                     imgurURL: imgurURL,
