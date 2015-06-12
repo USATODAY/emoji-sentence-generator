@@ -1,0 +1,36 @@
+.iapp-share-wrap {
+    background-color: white;
+    @include BoxShadowHelper(2);
+    border-radius: 5px;
+    left: 50%;
+    max-width: 600px;
+    min-height: 200px;
+    padding: 2em;
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+}
+
+.iapp-share-button {
+    display: inline-block;
+    margin: 0 0.5% 1em 0.5%;
+    width: 30%;
+    img {
+        display: block;
+    }
+}
+
+.iapp-share-buttons {
+    margin: 2em auto 0 auto;
+    max-width: 200px;
+}
+
+@media(max-width: 600px) {
+    .iapp-share-button {
+        margin-top: 0.5em;
+    }
+    .iapp-share-buttons {
+        margin-top: 1em;
+    }
+}
