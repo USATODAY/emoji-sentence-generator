@@ -2,9 +2,10 @@ define(
     [
         'react',
         'config',
-        'api/analytics'
+        'api/analytics',
+        'imgur'
     ], 
-    function(React, config, Analytics) {
+    function(React, config, Analytics, imgur) {
     return React.createClass({
         getInitialState: function() {
             var _this = this;
@@ -17,7 +18,9 @@ define(
             this.itemMargin = 5;
             this.canvasPadding = 10;
             this.canvas = document.getElementById("iapp-canvas");
+            this.hiddenCanvas = document.getElementById("iapp-canvas-hidden");
             this.ctx = this.canvas.getContext("2d");
+            this.hiddenCtx = this.hiddenCanvas.getContext("2d");
             this.fillBox();
             this.setupViewer();
         },
@@ -30,12 +33,13 @@ define(
             };
         },
         render: function() {
-            console.log(this.props.politician);
+            var hiddenCanvasStyle = { display: "none" };
             return (
                 <div className="iapp-emoji-viewer">
                     <h3 className="iapp-politician-quote">“{this.props.politician.quote}”</h3>
                     <h3 className="iapp-politician-credit">—{this.props.politician.name}, {this.props.politician.quote_date}</h3>
                     <canvas id="iapp-canvas" onClick={this.props.toggleKeyboard} className="iapp-canvas-quote" width={this.props.width} height={this.props.height}></canvas>
+                    <canvas id="iapp-canvas-hidden" style={hiddenCanvasStyle} width={this.props.width * 2} height={this.props.height * 2}></canvas>
                     <div className="iapp-share-button" onClick={this.share}>Share</div>
                 </div>
             );
@@ -44,6 +48,8 @@ define(
         fillBox: function() {
             this.ctx.fillStyle = "#fff";
             this.ctx.fillRect(0, 0, this.props.width, this.props.height);
+            this.hiddenCtx.fillStyle = "#fff";
+            this.hiddenCtx.fillRect(0, 0, this.props.width * 2, this.props.height * 2);
         },
         addText: function(string) {
             this.ctx.font = "28px sans-serif";
@@ -51,9 +57,9 @@ define(
         },
         setupViewer: function() {
                 this.drawImage('speech.png', 0, 0, 1);
-                this.drawImage("custom/100/" + this.props.politician.img, 0, 110, 1);
+                this.drawImage("custom/100/" + this.props.politician.img, 0, 110, 1, true);
         },
-        drawImage: function(imagePath, left, top, scale) {
+        drawImage: function(imagePath, left, top, scale, override) {
             var _this = this;
             scale = typeof scale !== 'undefined' ? scale : 1;
             var img = new Image();
@@ -62,6 +68,11 @@ define(
                 var width = img.width * scale;
                 var height = img.height * scale;
                 _this.ctx.drawImage(img, left, top, width, height);
+                if (!override) {
+                    _this.hiddenCtx.drawImage(img, left * 2, top * 2, width * 2, height * 2);
+                } else {
+                    _this.hiddenCtx.drawImage(img, left, top * 2, width, height);
+                }
             }, false);
             img.src = imgUrl;
         },
@@ -110,9 +121,18 @@ define(
         },
         share: function() {
             Analytics.trackEvent("Share clicked");
-            var imageURI = this.canvas.toDataURL();
-
-            // @Todo POST image uri to image service, receive back URL to use in share
+            var _this = this;
+            this.props.showShare();
+            var imageURI = this.hiddenCanvas.toDataURL();
+            imgur.uploadImage(imageURI, this.uploadSuccess, this.uploadError);
+        },
+        uploadSuccess: function(data) {
+            this.props.handleUpload(data);
+        },
+        uploadError: function(request, status) {
+            console.log(status);
+            console.log(request);
+            this.props.handleUploadError();
         }
     });
 });

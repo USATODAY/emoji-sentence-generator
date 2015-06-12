@@ -8,9 +8,10 @@ define(
     'jsx!components/Test',
     'jsx!components/Viewer',
     'jsx!components/Keyboard',
-    'jsx!components/Index'
+    'jsx!components/Index',
+    'jsx!components/Share'
   ],
-  function(jQuery, _, React, dataManager, config, Test, Viewer, Keyboard, Index) {
+  function(jQuery, _, React, dataManager, config, Test, Viewer, Keyboard, Index, Share) {
     var App = React.createClass({
         getInitialState: function() {
             var _this = this;
@@ -22,7 +23,10 @@ define(
                 emoji: [],
                 focus: null,
                 politicians: [],
-                showKeyboard: false
+                showKeyboard: false,
+                showShare: false,
+                shareData: {},
+                shareImage: null
             }
         },
         componentDidMount: function() {
@@ -59,7 +63,7 @@ define(
                             <div className="iapp-politician-next-button" onClick={this.nextFocus}><img src={config.base_url_path + "right-arrow.png"} alt="next" /></div>
                             <div className="iapp-politician-previous-button" onClick={this.previousFocus}><img src={config.base_url_path + "left-arrow.png"} alt="previous" /></div>
                         </div>
-                        <Viewer politician={this.state.focus} text={"Hello World"} height={250} images={this.state.images} width={viewerWidth} toggleKeyboard={this.toggleKeyboard} download={this.state.downloadImage} onSaveClick={this.downloadImage} />
+                        <Viewer politician={this.state.focus} text={"Hello World"} height={250} images={this.state.images} width={viewerWidth} toggleKeyboard={this.toggleKeyboard} download={this.state.downloadImage} showShare={this.toggleShare} handleUpload={this.handleUpload} handleUploadError={this.handleUploadError} onSaveClick={this.downloadImage} />
                         <Keyboard emojiClickHandler={this.emojiClickHandler} show={this.state.showKeyboard} emoji={this.state.emoji} onDeleteClick={this.deleteImage} toggleKeyboard={this.toggleKeyboard}/>
                     </div>
                 );
@@ -73,7 +77,12 @@ define(
                 </div>
                 );
             };
-            return (<div>{content}</div>);
+            return (
+            <div>
+                {content}
+                <Share show={this.state.showShare} shareText={"Hello World "} shareImage={this.state.shareImage}/>
+            </div>
+            );
         },
         addImage: function(emojiObj) {
             var currentImages = this.state.images;
@@ -114,6 +123,11 @@ define(
                 images: []
             });
         },
+        toggleShare: function() {
+            this.setState({
+                showShare: !this.state.showShare
+            });
+        },
         nextFocus: function() {
             var currentIndex = this.state.politicians.indexOf(this.state.focus);
             
@@ -143,6 +157,16 @@ define(
             this.setState({
                 showKeyboard: !this.state.showKeyboard
             });
+        },
+        handleUpload: function(responseData) {
+            console.log(responseData);
+            var imageLink = responseData.data.link;
+            this.setState({
+                shareImage: imageLink
+            });
+        },
+        handleUploadError: function() {
+            //@TODO show error message
         }
     });
 
