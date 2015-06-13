@@ -39,7 +39,7 @@ define(
                     <h3 className="iapp-politician-quote">“{this.props.politician.quote}”</h3>
                     <h3 className="iapp-politician-credit">—{this.props.politician.name}, {this.props.politician.quote_date}</h3>
                     <canvas id="iapp-canvas" onClick={this.props.toggleKeyboard} className="iapp-canvas-quote" width={this.props.width} height={this.props.height}></canvas>
-                    <canvas id="iapp-canvas-hidden" style={hiddenCanvasStyle} width={this.props.width * 2} height={this.props.height * 2}></canvas>
+                    <canvas id="iapp-canvas-hidden" style={hiddenCanvasStyle} width={600} height={315}></canvas>
                     <div className="iapp-share-button" onClick={this.share}>Share</div>
                 </div>
             );
