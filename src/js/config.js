@@ -4,7 +4,7 @@ define(
         var baseURL;
         var hostname = window.location.hostname;
         if ((hostname == "localhost" || hostname == "10.0.2.2")) {
-            baseURL = 'http://www.gannett-cdn.com/experiments/usatoday/2015/05/emoji-sentences/img/';
+            baseURL = 'img/';
         } else {
             baseURL = "http://" + hostname + "/services/webproxy/?url=http://www.gannett-cdn.com/experiments/usatoday/2015/05/emoji-sentences/img/";
         }
@@ -37,6 +37,8 @@ define(
             staticInfo: staticInfo,
             getEmojiLimit: function() {
                 return 12;
-            }
+            },
+            imgur_key: "2dfc9c8be1aa15d",
+            image_service_url: "https://usat-images.herokuapp.com/upload-image"
         };
 });
